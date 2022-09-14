@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"strings"
 	"io/ioutil"
 	"net/http"
 	"net/http/httputil"
@@ -102,7 +103,8 @@ func (client *Client) PostIssueComments(comments []Comment) error {
 // -- Private methods
 
 func (client *Client) postIssueComment(comment Comment, ch chan response) {
-	requestURL, err := urlutil.Join(client.baseURL, apiEndPoint, comment.IssuKey, commentEndPoint)
+	t := strings.TrimSpace(comment.IssuKey)
+	requestURL, err := urlutil.Join(client.baseURL, apiEndPoint, t, commentEndPoint)
 	if err != nil {
 		ch <- response{comment.IssuKey, err}
 		return
