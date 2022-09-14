@@ -68,6 +68,7 @@ inputs:
       summary: Jira issue keys separated with `|`
       description: Jira issue keys separated with `|`
       is_required: true
+      is_expand: true
 
   - base_url:
     opts:
